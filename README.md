@@ -66,36 +66,46 @@ The hook returns an object with the following properties:
 import React from 'react';
 import usePagination from './hooks/usePagination';
 
+const getUrl = (page: number, itemsLength: number) =>
+	`https://cataas.com/api/cats?limit=${itemsLength}&skip=${page * itemsLength}`;
+
 const PaginatedList: React.FC = () => {
-	const { data, loading, error, nextPage, prevPage, isPrevDisabled, isNextDisabled } = usePagination(
-		(page, size) => `https://cataas.com/api/cats?limit=${itemsLength}&skip=${page * itemsLength}`,
-		{ itemsLength: 10, pagesLength: 20 }
-	);
+  const { data, loading, error, nextPage, prevPage, isPrevDisabled,  isNextDisabled } = usePagination(
+    getUrl,
+    {
+      itemsLength: 2,
+      pagesLength: 20,
+    },
+    {
+      save: true,
+      savingMethod: 'cache',
+    },
+  );
 
-	if (loading) return <p>Loading...</p>;
-	if (error) return <p>Error loading data</p>;
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error loading data</p>;
 
-	return (
-		<div>
-			{loading ? (
-				<p>Loading...</p>
-			) : (
-				<ul className="flex">
-					{data?.map((cat: any) => (
-						<li key={cat.id}>
-							<img
-								className="w-[300px] h-[300px]"
-								src={`https://cataas.com/cat/${cat.id}`}
-								alt={cat.tags.join(', ')}
-							/>
-						</li>
-					))}
-				</ul>
-			)}
-			<button onClick={prevPage} disabled={isPrevDisabled}>Previous</button>
-			<button onClick={nextPage} disabled={isNextDisabled}>Next</button>
-	</div>
-	);
+  return (
+	  <div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <ul className="flex">
+          {data?.map((cat: any) => (
+            <li key={cat.id}>
+              <img
+                className="w-[300px] h-[300px]"
+                src={`https://cataas.com/cat/${cat.id}`}
+                alt={cat.tags.join(', ')}
+              />
+            </li>
+          ))}
+        </ul>
+      )}
+      <button onClick={prevPage} disabled={isPrevDisabled}>Previous</button>
+      <button onClick={nextPage} disabled={isNextDisabled}>Next</button>
+    </div>
+  );
 };
 
 export default PaginatedList;

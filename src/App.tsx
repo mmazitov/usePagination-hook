@@ -36,28 +36,28 @@ const App = () => {
 			<p>Current Page {curPageText}</p>
 			<div className="flex gap-1">
 				<button
-					className="p-2 text-white rounded-lg bg-slate-500 disabled:bg-gray-400"
+					className="bg-slate-500 disabled:bg-gray-400 p-2 rounded-lg text-white"
 					disabled={isPrevDisabled}
 					onClick={firstPage}
 				>
 					first page
 				</button>
 				<button
-					className="p-2 text-white rounded-lg bg-slate-500 disabled:bg-gray-400"
+					className="bg-slate-500 disabled:bg-gray-400 p-2 rounded-lg text-white"
 					disabled={isPrevDisabled}
 					onClick={prevPage}
 				>
 					prev page
 				</button>
 				<button
-					className="p-2 text-white rounded-lg bg-slate-500 disabled:bg-gray-400"
+					className="bg-slate-500 disabled:bg-gray-400 p-2 rounded-lg text-white"
 					disabled={isNextDisabled}
 					onClick={nextPage}
 				>
 					next page
 				</button>
 				<button
-					className="p-2 text-white rounded-lg bg-slate-500 disabled:bg-gray-400"
+					className="bg-slate-500 disabled:bg-gray-400 p-2 rounded-lg text-white"
 					disabled={isNextDisabled}
 					onClick={lastPage}
 				>
